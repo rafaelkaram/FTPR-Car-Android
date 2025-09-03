@@ -3,8 +3,19 @@ package com.example.myapitest
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapitest.adapter.CarAdapter
 import com.example.myapitest.databinding.ActivityMainBinding
+import com.example.myapitest.service.Result
+import com.example.myapitest.service.RetrofitClient
+import com.example.myapitest.service.safeApiCall
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
 
@@ -38,7 +49,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
-        // TODO
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.swipeRefreshLayout.isRefreshing = true
+            fetchItems()
+        }
+         binding.addCta.setOnClickListener{
+             navigateToNewItem()
+         }
+
+    }
+
+    private fun navigateToNewItem() {
+        TODO("Not yet implemented")
     }
 
     private fun requestLocationPermission() {
@@ -46,7 +69,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchItems() {
-        // TODO
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = safeApiCall {
+                RetrofitClient.apiService.getCars()
+            }
+
+            withContext(Dispatchers.Main){
+                when(result){
+                    is Result.Success-> {
+                        val adapter = CarAdapter(result.data){
+                            // TODO Detalhes do Carro
+                        }
+                        binding.recyclerView.adapter = adapter
+                    }
+                    is Result.Error ->{
+                        Toast.makeText(this@MainActivity, "Erro", Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {}
+                }
+            }
+        }
     }
 
     companion object {

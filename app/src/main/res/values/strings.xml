@@ -3,4 +3,5 @@
     <string name="error_login_verification">Erro ao validar o código.</string>
     <string name="error_login">Erro ao realizar o login</string>
     <string name="success_login_sent">Login realizado com sucesso</string>
+    <string name="error_request_location_permission">Permissão de localização negada.</string>
 </resources>

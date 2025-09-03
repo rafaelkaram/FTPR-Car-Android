@@ -12,6 +12,7 @@ import com.example.myapitest.databinding.ActivityMainBinding
 import com.example.myapitest.service.Result
 import com.example.myapitest.service.RetrofitClient
 import com.example.myapitest.service.safeApiCall
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -57,7 +58,17 @@ class MainActivity : AppCompatActivity() {
          binding.addCta.setOnClickListener{
              navigateToNewItem()
          }
+        binding.logoutCta.setOnClickListener{
+            onLogout()
+        }
+    }
 
+    private fun onLogout(){
+        FirebaseAuth.getInstance().signOut()
+        val intent = LoginActivity.newIntent(this)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
     }
 
     private fun navigateToNewItem() {

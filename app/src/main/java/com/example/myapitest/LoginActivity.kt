@@ -1,5 +1,7 @@
 package com.example.myapitest
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -90,5 +92,9 @@ class LoginActivity : AppCompatActivity() {
     private fun navigateToMainActivity() {
         startActivity(MainActivity.newIntent(this))
         finish()
+    }
+
+    companion object {
+        fun newIntent(context: Context) = Intent(context, LoginActivity::class.java)
     }
 }

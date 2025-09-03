@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             binding.swipeRefreshLayout.isRefreshing = true
             fetchItems()
+            binding.swipeRefreshLayout.isRefreshing = false
         }
          binding.addCta.setOnClickListener{
              navigateToNewItem()
@@ -89,7 +90,12 @@ class MainActivity : AppCompatActivity() {
                 when(result){
                     is Result.Success-> {
                         val adapter = CarAdapter(result.data){
-                            // TODO Detalhes do Carro
+                            startActivity(
+                                CarDetailActivity.newIntent(
+                                context = this@MainActivity,
+                                itemId = it.id
+                                )
+                            )
                         }
                         binding.recyclerView.adapter = adapter
                     }

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapitest.databinding.ActivityCarDetailBinding
@@ -53,6 +54,9 @@ class CarDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         binding.toolbar.setNavigationOnClickListener {
             finish()
         }
+        binding.deleteCTA.setOnClickListener {
+            deleteCar()
+        }
     }
 
     private fun setupGoogleMap(){
@@ -94,6 +98,32 @@ class CarDetailActivity : AppCompatActivity(), OnMapReadyCallback {
                     }
                     is Result.Error ->{
                         handleError()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun deleteCar(){
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = safeApiCall { RetrofitClient.apiService.deleteCar(car.id) }
+
+            withContext(Dispatchers.Main){
+                when(result){
+                    is Result.Success -> {
+                        Toast.makeText(
+                            this@CarDetailActivity,
+                            R.string.success_delete,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        finish()
+                    }
+                    is Result.Error ->{
+                        Toast.makeText(
+                            this@CarDetailActivity,
+                            R.string.error_delete,
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }

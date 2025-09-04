@@ -11,4 +11,6 @@
     <string name="error_validate_car_licence">Placa deve estar no formato ABC-1234 ou ABC1D23</string>
     <string name="success_create_car">%1$s adicionado com sucesso!</string>
     <string name="error_create_car">Erro ao criar o carro</string>
+    <string name="error_delete">Ocorreu um erro ao deletar o carro</string>
+    <string name="success_delete">Carro deletado com sucesso</string>
 </resources>

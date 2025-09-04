@@ -82,8 +82,6 @@ class NewCarActivity : AppCompatActivity(), OnMapReadyCallback {
         setupGoogleMap()
     }
 
-
-
     private fun setupView() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

@@ -13,6 +13,7 @@ import com.example.myapitest.service.Result
 import com.example.myapitest.service.RetrofitClient
 import com.example.myapitest.service.safeApiCall
 import com.example.myapitest.ui.loadUrl
+import com.example.myapitest.utils.ValidationUtils.isValidLicencePlate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -56,6 +57,9 @@ class CarDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         binding.deleteCTA.setOnClickListener {
             deleteCar()
+        }
+        binding.editCTA.setOnClickListener {
+            saveChanges()
         }
     }
 
@@ -122,6 +126,59 @@ class CarDetailActivity : AppCompatActivity(), OnMapReadyCallback {
                         Toast.makeText(
                             this@CarDetailActivity,
                             R.string.error_delete,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        }
+    }
+
+    private fun saveChanges(){
+        if(!validateForm()) return
+
+        updateCar()
+    }
+
+    private fun validateForm(): Boolean {
+        val licenceText = binding.licence.text.toString()
+        if (licenceText.isBlank()) {
+            Toast.makeText(this, getString(R.string.error_validate_form, "placa"), Toast.LENGTH_SHORT).show()
+            return false
+        }
+
+        if (!isValidLicencePlate(licenceText)) {
+            Toast.makeText(this,  getString(R.string.error_validate_car_licence), Toast.LENGTH_SHORT).show()
+            return false
+        }
+        return true
+    }
+
+    private fun updateCar() {
+        CoroutineScope(Dispatchers.IO).launch {
+            val result = safeApiCall {
+                RetrofitClient.apiService.updateCar(
+                    car.id,
+                    car.copy(
+                        licence = binding.licence.text.toString().uppercase()
+                    )
+                )
+            }
+            withContext(Dispatchers.Main) {
+                when (result) {
+                    is Result.Success -> {
+                        Toast.makeText(
+                            this@CarDetailActivity,
+                            R.string.success_update,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        finish()
+                    }
+
+                    is Result.Error -> {
+                        Toast.makeText(
+                            this@CarDetailActivity,
+                            R.string.error_update,
                             Toast.LENGTH_SHORT
                         ).show()
                     }

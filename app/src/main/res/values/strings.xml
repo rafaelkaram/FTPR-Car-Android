@@ -13,4 +13,6 @@
     <string name="error_create_car">Erro ao criar o carro</string>
     <string name="error_delete">Ocorreu um erro ao deletar o carro</string>
     <string name="success_delete">Carro deletado com sucesso</string>
+    <string name="success_update">Carro atualizado com sucesso\n</string>
+    <string name="error_update">Erro ao atualizar carro</string>
 </resources>

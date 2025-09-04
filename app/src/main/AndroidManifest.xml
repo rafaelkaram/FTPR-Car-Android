@@ -21,9 +21,18 @@
         android:theme="@style/Theme.AppCompat.DayNight"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.myapitest.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY" />
+            android:value="AIzaSyBsorVhKsH1JTBxxod_Tq2_NUsv7LVcT6c" />
         <activity
             android:name=".NewCarActivity"
             android:exported="false"

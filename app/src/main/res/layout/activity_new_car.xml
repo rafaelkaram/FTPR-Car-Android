@@ -43,6 +43,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/name" />
 
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/licence"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:hint="Placa"
+        app:layout_constraintStart_toStartOf="@id/name"
+        app:layout_constraintEnd_toEndOf="@id/name"
+        app:layout_constraintTop_toBottomOf="@id/year" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/imageUrl"
@@ -52,7 +61,7 @@
         android:hint="Image URL"
         app:layout_constraintStart_toStartOf="@id/name"
         app:layout_constraintEnd_toEndOf="@id/name"
-        app:layout_constraintTop_toBottomOf="@id/year" />
+        app:layout_constraintTop_toBottomOf="@id/licence" />
 
     <ImageButton
         android:id="@+id/takePictureCta"
@@ -73,15 +82,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/licence"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:hint="Placa"
-        app:layout_constraintStart_toStartOf="@id/name"
-        app:layout_constraintEnd_toEndOf="@id/name"
-        app:layout_constraintTop_toBottomOf="@id/takePictureCta" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mapContent"
@@ -90,7 +90,7 @@
         android:layout_marginTop="12dp"
         android:layout_marginBottom="12dp"
         android:visibility="gone"
-        app:layout_constraintTop_toBottomOf="@id/licence"
+        app:layout_constraintTop_toBottomOf="@id/takePictureCta"
         app:layout_constraintBottom_toTopOf="@id/saveCta"
         tools:visibility="visible">
 

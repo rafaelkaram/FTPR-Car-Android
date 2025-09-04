@@ -32,7 +32,7 @@
         </provider>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBsorVhKsH1JTBxxod_Tq2_NUsv7LVcT6c" />
+            android:value="YOUR_API_KEY" />
         <activity
             android:name=".NewCarActivity"
             android:exported="false"

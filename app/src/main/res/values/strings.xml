@@ -8,7 +8,7 @@
     <string name="error_validate_form">Por favor, preencha o campo %1$s</string>
     <string name="error_validate_form_location">Por favor, selecione a localização no mapa.</string>
     <string name="error_validate_car_year">Ano deve estar no formato AAAA/AAAA (ex: 2020/2020)</string>
-    <string name="error_validate_car_licence">Placa deve estar no formato ABC-1234 ou <ABC1D23></ABC1D23></string>
+    <string name="error_validate_car_licence">Placa deve estar no formato ABC-1234 ou ABC1D23</string>
     <string name="success_create_car">%1$s adicionado com sucesso!</string>
     <string name="error_create_car">Erro ao criar o carro</string>
     <string name="error_delete">Ocorreu um erro ao deletar o carro</string>
